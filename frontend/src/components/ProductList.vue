@@ -27,9 +27,7 @@
               class="button is-info is-small"
               >Edit</router-link
             >
-            <a
-              class="button is-danger is-small"
-              @click="deleteTodo(item.id)"
+            <a class="button is-danger is-small" @click="deleteTodo(item.id)"
               >Delete</a
             >
           </td>
@@ -42,7 +40,7 @@
 <script>
 // import axios
 import axios from "axios";
- 
+
 export default {
   name: "ToDoslist",
   data() {
@@ -50,11 +48,11 @@ export default {
       items: [],
     };
   },
- 
+
   created() {
     this.getToDos();
   },
- 
+
   methods: {
     // Get All Products
     async getToDos() {
@@ -65,12 +63,12 @@ export default {
         console.log(err);
       }
     },
- 
+
     // Delete Product
     async deleteTodo(id) {
       try {
-        await axios.delete(`http://localhost:8000/api/v1/todos/${id}`);
-        this.getProducts();
+        await axios.delete(`http://localhost:8000/api/v1/todos/${id}/`);
+        this.getToDos();
       } catch (err) {
         console.log(err);
       }

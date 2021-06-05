@@ -4,6 +4,8 @@ node_modules
 /dist
 node_modules
 
+**\__pycache__\**
+
 # local env files
 .env.local
 .env.*.local
@@ -122,3 +124,6 @@ dist
 
 # TernJS port file
 .tern-port
+backend/todolist/todos/migrations/__pycache__/__init__.cpython-39.pyc
+backend/todolist/todolist/__pycache__/settings.cpython-39.pyc
+backend/todolist/todolist/__pycache__/settings.cpython-39.pyc

@@ -1,68 +1,62 @@
 <template>
   <div>
     <div class="field">
-      <label class="label">Title</label>
+      <label class="label">Todo Task</label>
       <div class="control">
         <input
           class="input"
           type="text"
-          placeholder="Todo Name"
-          v-model="productName"
-        />
-      </div>
-    </div>
- 
-    <div class="field">
-      <label class="label">Date</label>
-      <div class="control">
-        <input
-          class="input"
-          type="text"
-          placeholder="Todo Date"
-          v-model="productPrice"
-        />
-      </div>
-    </div>
-
-     <div class="field">
-      <label class="label">users</label>
-      <div class="control">
-        <input
-          class="input"
-          type="text"
-          placeholder="users"
-          v-model="productPrice"
-        />
-      </div>
-    </div>
-
-     <div class="field">
-      <label class="label">content</label>
-      <div class="control">
-        <input
-          class="input"
-          type="text"
-          placeholder="content"
-          v-model="productPrice"
+          placeholder="Product Name"
+          v-model="title"
         />
       </div>
     </div>
 
     <div class="field">
-      <label class="label">importance</label>
+      <label class="label">Todo Date</label>
+      <div class="control">
+        <input
+          class="input"
+          type="date"
+          placeholder="mm/dd/yyyy"
+          v-model="todoDate"
+        />
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Todo Users</label>
       <div class="control">
         <input
           class="input"
           type="text"
-          placeholder="importance"
-          v-model="productPrice"
+          placeholder="John Doe"
+          v-model="users"
         />
       </div>
     </div>
-
- 
+    <div class="field">
+      <label class="label">Description</label>
+      <div class="control">
+        <textarea
+          class="input"
+          placeholder="Todo description"
+          v-model="content"
+        />
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Importance</label>
+      <div class="control">
+        <input
+          class="input"
+          type="number"
+          placeholder="0-5"
+          v-model="importance"
+        />
+      </div>
+    </div>
     <div class="control">
-      <button class="button is-success" @click="saveProduct">SAVE</button>
+      <button class="button is-success" @click="addTodo">ADD</button>
     </div>
   </div>
 </template>
@@ -70,25 +64,36 @@
 <script>
 // import axios
 import axios from "axios";
- 
+
 export default {
   name: "AddProduct",
   data() {
     return {
-      productName: "",
-      productPrice: "",
+      title: "",
+      todoDate: "",
+      users: "",
+      content: "",
+      importance: 0,
     };
   },
   methods: {
     // Create New product
-    async saveProduct() {
+    async addTodo() {
       try {
-        await axios.post("http://localhost:5000/products", {
-          product_name: this.productName,
-          product_price: this.productPrice,
+        await axios.post("http://localhost:8000/api/v1/todos/", {
+          title: this.title,
+          date: this.todoDate,
+          users: this.users,
+          content: this.content,
+          importance: this.importance,
         });
-        this.productName = "";
-        this.productPrice = "";
+
+        this.title = "";
+        this.todoDate = "";
+        this.users = "";
+        this.content = "";
+        this.importance = "";
+
         this.$router.push("/");
       } catch (err) {
         console.log(err);
